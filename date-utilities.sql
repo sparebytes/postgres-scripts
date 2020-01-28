@@ -92,15 +92,14 @@ create or replace function "public"."dategrid"(
     "part" text,
     "beg" timestamptz,
     "end" timestamptz default null,
-    "grid" bool default null,
     "offset" interval default null,
     "format" text  default null
 )
 returns table(dateRangeLabel text, dateRangeBegin timestamptz, dateRangeEnd timestamptz) AS $$
 begin
     return query with
-    cteParams("ParamDateRangeType", "ParamBeginTimestamp", "ParamEndTimestamp", "ParamFitToGrid", "ParamOffset", "DateRangeFormat") as (values
-        ("part", "beg", "end", "grid", "offset", "format")
+    cteParams("ParamDateRangeType", "ParamBeginTimestamp", "ParamEndTimestamp", "ParamOffset", "DateRangeFormat") as (values
+        ("part", "beg", "end", "offset", "format")
     --   ('hour',    date_trunc('year', CURRENT_TIMESTAMP - interval '1' year), date_trunc('year', CURRENT_TIMESTAMP), null, null, null),
     --   ('day',     date_trunc('year', CURRENT_TIMESTAMP - interval '1' year), date_trunc('year', CURRENT_TIMESTAMP), null, null, null),
     --   ('week',    date_trunc('year', CURRENT_TIMESTAMP - interval '1' year), date_trunc('year', CURRENT_TIMESTAMP), null, null, null),
@@ -131,7 +130,6 @@ begin
             "ParamDateRangeType"::text,
             "ParamBeginTimestamp"::timestamptz,
             "ParamEndTimestamp"::timestamptz,
-            coalesce("ParamFitToGrid"::bool, true) as "ParamFitToGrid",
             coalesce("ParamOffset"::interval, interval '0' second) as "ParamOffset",
             date_trunc('year', "ParamBeginTimestamp"::timestamptz) as "ParamBeginYear",
             date_trunc('year', "ParamEndTimestamp"::timestamptz) as "ParamEndYear",
