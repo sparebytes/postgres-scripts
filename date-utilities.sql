@@ -88,7 +88,6 @@ $$ language plpgsql;
 
 
 -- dategrid
-drop function if exists "public"."dategrid";
 create or replace function "public"."dategrid"(
     "part" text,
     "beg" timestamptz,
