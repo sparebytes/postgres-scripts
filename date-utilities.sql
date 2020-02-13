@@ -176,18 +176,9 @@ $$ language plpgsql;
 -- Example
 select *
 from dategrid(
-    "part" := 'quarter',
-    "beg" :=  date_trunc('year', CURRENT_TIMESTAMP - interval '1' year),
-    "end" := date_trunc('year', CURRENT_TIMESTAMP),
-    "offset" := null,
-    "format" := null
-);
-
-select *
-from dategrid(
     "part" := 'month',
-    "beg" :=  date_trunc('year', CURRENT_TIMESTAMP - interval '1' year),
-    "end" := date_trunc('year', CURRENT_TIMESTAMP),
+    "beg" :=  CURRENT_TIMESTAMP - interval '1' year,
+    "end" := CURRENT_TIMESTAMP,
     "offset" := null,
     "format" := null
 );
