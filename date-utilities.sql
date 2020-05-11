@@ -174,7 +174,7 @@ $$ language plpgsql;
 
 
 -- Example
-select *
+select dateRangeLabel, dateRangeBegin, dateRangeEnd
 from dategrid(
     "part" := 'month',
     "beg" :=  CURRENT_TIMESTAMP - interval '1' year,
