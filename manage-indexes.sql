@@ -1,4 +1,12 @@
 --
+-- RESET SEQUENCE
+--
+SELECT setval('YOUR_TABLE_id_seq', COALESCE((SELECT MAX(id)+1 FROM YOUR_TABLE), 1), false);
+
+ALTER SEQUENCE serial RESTART WITH 105
+
+
+--
 -- Exact BTree
 --
 create index if not exists "table_column_idx" ON "schema"."table" using btree (("column"));
