@@ -175,10 +175,4 @@ $$ language plpgsql;
 
 -- Example
 select dateRangeLabel, dateRangeBegin, dateRangeEnd
-from dategrid(
-    "part" := 'month',
-    "beg" :=  CURRENT_TIMESTAMP - interval '1' year,
-    "end" := CURRENT_TIMESTAMP,
-    "offset" := null,
-    "format" := null
-);
+from ;
